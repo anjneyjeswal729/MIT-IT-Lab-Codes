@@ -1,0 +1,161 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             RESET, DATA, READONLY
+    2 00000000                 EXPORT           __Vectors
+    3 00000000         __Vectors
+    4 00000000 10001000        DCD              0x10001000  ; stack pointer val
+                                                            ue when stack is em
+                                                            pty
+    5 00000004 00000000        DCD              Reset_Handler ; reset vector
+    6 00000008                 ALIGN
+    7 00000008                 AREA             MYCODE, CODE, READONLY
+    8 00000000                 ENTRY
+    9 00000000                 EXPORT           Reset_Handler
+   10 00000000         Reset_Handler
+   11 00000000 4815            LDR              R0, =VALUE
+   12 00000002 4916            LDR              R1, =NUM
+   13 00000004 F8DF 8058       LDR              R8,=RESULT
+   14 00000008 F04F 0204       MOV              R2, #4
+   15 0000000C F04F 0300       MOV              R3, #0
+   16 00000010 F04F 0600       MOV              R6, #0
+   17 00000014         loop
+   18 00000014 F850 4B04       LDR              R4,[R0],#4
+   19 00000018 F851 5B04       LDR              R5,[R1],#4
+   20 0000001C 1C33            ADDS             R3,R6,#0
+   21 0000001E F04F 0600       MOV              R6,#0
+   22 00000022 191B            ADDS             R3,R3,R4
+   23 00000024 195B            ADDS             R3,R3,R5
+   24 00000026 F146 0600       ADC              R6,R6,#0
+   25 0000002A F848 3B04       STR              R3,[R8],#4
+   26 0000002E 1E52            SUBS             R2,R2,#1
+   27 00000030 D1F0            BNE              loop
+   28 00000032 F848 3B04       STR              R3, [R8],#4
+   29 00000036         STOP
+   30 00000036 E7FE            B                STOP
+   31 00000038 F0101010 
+              F1010101 
+              10010011 
+              00011011 VALUE   DCD              0xF0101010,0xF1010101,0x1001001
+1,0x00011011
+   32 00000048 10101010 
+              12341234 
+              10010011 
+              00011011 NUM     DCD              0x10101010,0x12341234,0x1001001
+1,0x00011011
+   33 00000058 00000000 
+              00000000 
+              00000000         AREA             DATA, DATA, READWRITE
+   34 00000000 00000000 
+                       RESULT  DCD              0
+   35 00000004         
+                       
+Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=TP.d -oT
+P.o -IC:\Keil\ARM\RV31\INC -IC:\Keil\ARM\CMSIS\Include -IC:\Keil\ARM\Inc\NXP\LP
+C17xx --predefine="__EVAL SETA 1" --list=TP.lst TP.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+RESET 00000000
+
+Symbol: RESET
+   Definitions
+      At line 1 in file TP.s
+   Uses
+      None
+Comment: RESET unused
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 3 in file TP.s
+   Uses
+      At line 2 in file TP.s
+Comment: __Vectors used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+MYCODE 00000000
+
+Symbol: MYCODE
+   Definitions
+      At line 7 in file TP.s
+   Uses
+      None
+Comment: MYCODE unused
+NUM 00000048
+
+Symbol: NUM
+   Definitions
+      At line 32 in file TP.s
+   Uses
+      At line 12 in file TP.s
+Comment: NUM used once
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 10 in file TP.s
+   Uses
+      At line 5 in file TP.s
+      At line 9 in file TP.s
+
+STOP 00000036
+
+Symbol: STOP
+   Definitions
+      At line 29 in file TP.s
+   Uses
+      At line 30 in file TP.s
+Comment: STOP used once
+VALUE 00000038
+
+Symbol: VALUE
+   Definitions
+      At line 31 in file TP.s
+   Uses
+      At line 11 in file TP.s
+Comment: VALUE used once
+loop 00000014
+
+Symbol: loop
+   Definitions
+      At line 17 in file TP.s
+   Uses
+      At line 27 in file TP.s
+Comment: loop used once
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+DATA 00000000
+
+Symbol: DATA
+   Definitions
+      At line 33 in file TP.s
+   Uses
+      None
+Comment: DATA unused
+RESULT 00000000
+
+Symbol: RESULT
+   Definitions
+      At line 34 in file TP.s
+   Uses
+      At line 13 in file TP.s
+Comment: RESULT used once
+2 symbols
+343 symbols in table

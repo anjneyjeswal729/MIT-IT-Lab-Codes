@@ -1,0 +1,2 @@
+Dependencies for Project 'TRIAL', Target 'Target 1': (DO NOT MODIFY !)
+F (.\TP.s)(0x659B3F71)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC -I C:\Keil\ARM\CMSIS\Include -I C:\Keil\ARM\Inc\NXP\LPC17xx --list "TP.lst" --xref -o "TP.o" --depend "TP.d")
