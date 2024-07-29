@@ -11,3 +11,6 @@ Welcome,
   DBS-LAB: C# and SqlPlus 
   NPS-LAB: Socket programming in C and Packet tracer files
   ES-LAB: Assembly and Embedded C
+## V sem
+  IS-Lab
+  POS-Lab
