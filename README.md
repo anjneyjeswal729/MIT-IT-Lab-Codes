@@ -4,13 +4,13 @@ Welcome,
   This repo contains the codes belong to labs of Manipal Institute of Technology, IT branch
 
 ## III sem
-  DS-LAB: Data Structures lab in C language \n
+  DS-LAB: Data Structures lab in C language 
   OOPS: Java
 
 ## IV sem
-  DBS-LAB: C# and SqlPlus \n
-  NPS-LAB: Socket programming in C and Packet tracer files \n
+  DBS-LAB: C# and SqlPlus 
+  NPS-LAB: Socket programming in C and Packet tracer files 
   ES-LAB: Assembly and Embedded C
 ## V sem
-  IS-Lab:\n
+  IS-Lab:
   POS-Lab:
