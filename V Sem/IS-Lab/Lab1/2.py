@@ -7,8 +7,6 @@ def keymsg(jk,leng):
 
 def encrypt(message,key,autokey):
     message=message.lower()
-    autkey=chr(autokey+ord('a'))
-    autkey+=message[:len(message)-1]
     li=[]
     encmsg=""
     for i in range(len(message)):
@@ -20,27 +18,34 @@ def encrypt(message,key,autokey):
     encmsg=""
     for i in range(len(message)):
         num=ord(message[i])-ord('a')
-        num1=ord(autkey[i])-ord('a')
+        num1=ord(autokey[i])-ord('a')
         numch=chr(((num+num1)%26)+ord('a'))
         encmsg+=numch
     li.append(encmsg)
     return li
 
-def decrypt(message,key,autokey):
+def decrypt(message,key):
     message=message.lower()
     encmsg=""
     for i in range(len(message)):
         numch=chr(((ord(message[i])-ord(key[i]))%26)+ord('a'))
         encmsg+=numch
     return encmsg
-    
+def autodec(message,key):
+    decmsg=""
+    for i in range(len(message)):
+        num=ord(message[i])-ord('a')
+        num1=ord(key[i])-ord('a')
+        numch=chr(((num-num1)%26)+ord('a'))
+        decmsg+=numch
+    return decmsg
+
 message="the house is being sold tonight"
 message=message.replace(" ","")
 key="dollars"
+autkey=chr(7+ord('a'))
+autkey+=message[:len(message)-1]
+encmsg=encrypt(message,keymsg(key.lower(),len(message)),autkey)
+vigenc,autoenc=encmsg
+print(autodec(autoenc,autkey))
 
-encmsg=encrypt(message,keymsg(key.lower(),len(message)),7)
-print(encmsg)
-# decmsg=decrypt(encmsg,keymsg(key.lower(),len(message)),7)
-# print(decmsg)
-
-    
