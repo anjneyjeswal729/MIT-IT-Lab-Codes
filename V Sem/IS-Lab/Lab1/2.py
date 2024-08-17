@@ -46,6 +46,8 @@ def autodec(message,key):
 message="the house is being sold tonight"
 message=message.replace(" ","")
 key="dollars"
+autkey=chr(7+ord('a'))
+autkey+=message[:len(message)-1]
 encmsg=encrypt(message,keymsg(key.lower(),len(message)),autkey)
 vigenc,autoenc=encmsg
 print(autodec(autoenc,7))
