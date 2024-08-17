@@ -33,19 +33,19 @@ def decrypt(message,key):
     return encmsg
 def autodec(message,key):
     decmsg=""
+    akey=""
+    akey+=chr(key+ord('a'))
     for i in range(len(message)):
         num=ord(message[i])-ord('a')
-        num1=ord(key[i])-ord('a')
+        num1=ord(akey[i])-ord('a')
         numch=chr(((num-num1)%26)+ord('a'))
         decmsg+=numch
+        akey+=numch
     return decmsg
 
 message="the house is being sold tonight"
 message=message.replace(" ","")
 key="dollars"
-autkey=chr(7+ord('a'))
-autkey+=message[:len(message)-1]
 encmsg=encrypt(message,keymsg(key.lower(),len(message)),autkey)
 vigenc,autoenc=encmsg
-print(autodec(autoenc,autkey))
-
+print(autodec(autoenc,7))
