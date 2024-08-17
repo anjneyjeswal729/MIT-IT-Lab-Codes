@@ -1,39 +1,61 @@
 def mod_inverse(a, m):
-    """Find the modular inverse of a under modulo m."""
     a = a % m
     for x in range(1, m):
         if (a * x) % m == 1:
             return x
-    raise ValueError(f"No modular inverse for a={a} under modulo m={m}")
+    return None
 
-def affine_decrypt(ciphertext, a, b):
-    """Decrypt an affine cipher text given the parameters a and b."""
-    # The modular inverse of a modulo 26
-    a_inv = mod_inverse(a, 26)
+def affine_decrypt(ciphertext, a, b, m=26):
+    a_inv = mod_inverse(a, m)
+    if a_inv is None:
+        return "No modular inverse found for a =", a
     
-    plaintext = ""
+    plaintext = []
+    
     for char in ciphertext:
-        if char.isalpha():  # Check if the character is a letter
-            # Convert letter to number (A=0, B=1, ..., Z=25)
+        if char.isalpha():
             y = ord(char.upper()) - ord('A')
-            # Decrypt using the affine cipher decryption formula
-            x = (a_inv * (y - b)) % 26
-            # Convert number back to letter
-            plaintext += chr(x + ord('A'))
+            x = (a_inv * (y - b)) % m
+            decrypted_char = chr(x + ord('A'))
+            plaintext.append(decrypted_char)
         else:
-            # Non-letter characters are not encrypted
-            plaintext += char
+            plaintext.append(char)
     
-    return plaintext
+    return ''.join(plaintext)
 
-# Parameters of the affine cipher
-a = 5
-b = 6
+def find_affine_parameters(plaintext_pair, ciphertext_pair, m=26):
+    (p1, p2) = plaintext_pair
+    (c1, c2) = ciphertext_pair
+    
+    p1_num, p2_num = ord(p1) - ord('A'), ord(p2) - ord('A')
+    c1_num, c2_num = ord(c1) - ord('A'), ord(c2) - ord('A')
+    
+    for a in range(1, m):
+        if mod_inverse(a, m) is None:
+            continue
+        
+        b = (c1_num - a * p1_num) % m
+        if (a * p2_num + b) % m == c2_num:
+            return a, b
+    
+    return None
 
-# Ciphertext to decrypt
-ciphertext = "XPALASXYFGFUKPXUSOGEUTKCDGEXANMGNVS"
+# Known plaintext and ciphertext pairs
+plaintext_pair = ("A", "B")
+ciphertext_pair = ("G", "L")
 
-# Decrypt the ciphertext
-plaintext = affine_decrypt(ciphertext, a, b)
+# Find affine cipher parameters
+parameters = find_affine_parameters(plaintext_pair, ciphertext_pair)
 
-print(f"Decrypted message: {plaintext}")
+if parameters:
+    a, b = parameters
+    print(f"Affine cipher parameters found: a = {a}, b = {b}")
+
+    # Ciphertext to decrypt
+    ciphertext = "XPALASXYFGFUKPXUSOGEUTKCDGEXANMGNVS"
+    
+    # Decrypt the ciphertext
+    plaintext = affine_decrypt(ciphertext, a, b)
+    print(f"Decrypted message: {plaintext}")
+else:
+    print("Affine cipher parameters not found.")
