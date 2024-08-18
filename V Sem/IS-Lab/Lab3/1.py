@@ -5,11 +5,21 @@ p = 61
 q = 53
 n = p * q
 phi_n = (p - 1) * (q - 1)
-e = 17  
+def gcd(p, q):
+    # Use Euclid's algorithm to find the GCD.
+    while q != 0:
+        p, q = q, p % q
+    return p
 
+def coprime(nm):
+    for i in range(2,nm):
+        if gcd(i, nm) == 1:
+            return i
+    return None
+e=coprime(phi_n)
 # Compute private key d
-d = 2753
-
+d = mod_inverse(e,phi_n)
+print(d)
 # RSA encryption function
 def rsa_encrypt(message, n, e):
     encmsg=[]
