@@ -17,7 +17,7 @@ received_hash = received_hash.decode()
 computed_hash = hashlib.sha256(data).hexdigest()
 
 if computed_hash == received_hash:
-    print("Data integrity verified: Hashes match!")
+    print("Data integrity verified: Hashes match! 😊")
 else:
     print("Data integrity check failed: Hashes do not match!")
 
