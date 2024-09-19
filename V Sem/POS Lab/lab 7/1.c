@@ -1,3 +1,7 @@
+// To run this code give number of threads as command line arguments
+// gcc -pthread 1.c -o p ; ./p 4
+
+
 #include<stdio.h>
 #include<semaphore.h>
 #include<pthread.h>
