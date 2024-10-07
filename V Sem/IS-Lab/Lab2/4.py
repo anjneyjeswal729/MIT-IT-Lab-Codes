@@ -1,6 +1,6 @@
-from Cryptodome.Cipher import DES3
-from Cryptodome.Util.Padding import pad,unpad
-from Cryptodome.Random import get_random_bytes
+from Crypto.Cipher import DES3
+from Crypto.Util.Padding import pad,unpad
+from Crypto.Random import get_random_bytes
 import base64
 key = bytes.fromhex('1234567890abcdef0123456789abcdef1234567890abcdef')
 print(len('401b7cfe0ee5b7f4bca2275834b2bc146b8bc7f7c8d7d671'))
