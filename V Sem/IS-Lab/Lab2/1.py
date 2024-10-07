@@ -1,5 +1,5 @@
-from Cryptodome.Cipher import DES
-from Cryptodome.Util.Padding import pad,unpad
+from Crypto.Cipher import DES
+from Crypto.Util.Padding import pad,unpad
 import base64
 key = b'A1B2C3D4'   
 text1 = b'Confidential Data!'
