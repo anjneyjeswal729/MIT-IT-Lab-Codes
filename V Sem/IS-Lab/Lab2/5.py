@@ -1,5 +1,5 @@
-from Cryptodome.Cipher import AES
-from Cryptodome.Util.Padding import pad,unpad
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad,unpad
 import base64
 
 key =bytes.fromhex("FEDCBA9876543210FEDCBA9876543210")
