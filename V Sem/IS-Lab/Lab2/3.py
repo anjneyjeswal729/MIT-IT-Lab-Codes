@@ -1,6 +1,6 @@
-from Cryptodome.Cipher import DES, AES
-from Cryptodome.Util.Padding import pad, unpad
-from Cryptodome.Random import get_random_bytes
+from Crypto.Cipher import DES, AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
 import time
 
 # Constants
