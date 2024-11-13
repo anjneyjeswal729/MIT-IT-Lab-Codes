@@ -1,165 +1,155 @@
-//FIFO completed but Optimal not yet finished
+// This has FIFO, Optimal and LRU page Replacement
 
 #include <stdio.h>
 #include <stdlib.h>
 
-struct LL
-{
-    int p;
-    struct LL *next;
-};
 
-struct LL *head = NULL;
+int pages[100];
 
-void printll()
-{
-    struct LL *curr = head;
-    while (curr != NULL)
-    {
-        printf("%d\t", curr->p);
-        curr = curr->next;
+int main(){
+    int n;
+    printf("Enter number of pages:");
+    scanf("%d",&n);
+    printf("Enter pages:");
+    for (int i=0;i<n;i++){
+        scanf("%d",&pages[i]);
     }
-    printf("\n");
-}
-
-int check(int n)
-{
-    struct LL *curr = head;
-    while (curr != NULL)
-    {
-        if (curr->p == n)
+    int w;
+    printf("Enter window size:");
+    scanf("%d",&w);
+    while(1){
+        printf("1. FIFO\n2. LRU\n3. Optimal\n4. Exit\n");
+        int ch,faults=0;
+        scanf("%d",&ch);
+        int frames[w];
+        for (int i = 0; i < w; i++) {
+            frames[i] = -1;
+        }
+        int m=0;
+        switch (ch)
         {
-            return 1;
-        }
-        curr = curr->next;
-    }
-    return 0;
-}
-
-int find_optimal(struct LL *pages[], int frame_count, int p, int current_index) {
-    int farthest = -1, index_to_replace = -1;
-
-    for (int i = 0; i < frame_count; i++) {
-        int j;
-        for (j = current_index; j < p; j++) {
-            if (pages[i]->p == j) {
-                if (j > farthest) {
-                    farthest = j;
-                    break;
+        case 1:
+            printf("FIFO\n");
+            for (int i=0;i<n;i++){
+                int flag=0;
+                for (int j=0;j<w;j++){
+                    if(frames[j]==pages[i]){
+                        flag=1;
+                        break;
+                    }
                 }
-            }
-        }
-        if (j == p) {
-            return i;
-        }
-    }
-
-    return index_to_replace; 
-}
-
-int main(int argc, char const *argv[])
-{
-    int f, p;
-    printf("Enter number of frames and pages: ");
-    scanf("%d %d", &f, &p);
-
-    int c = 0;
-    printf("FIFO:\n");
-    int pf = 0;
-    for (int i = 0; i < p; i++)
-    {
-        int pid;
-        printf("Enter Pno: ");
-        scanf("%d", &pid);
-
-        int n = check(pid);
-        if (!n)
-        {
-            if (c < f)
-            {
-                struct LL *node = (struct LL *)malloc(sizeof(struct LL));
-                node->p = pid;
-                node->next = head;
-                head = node;
-                c++;
-            }
-            else
-            {
-
-                struct LL *oldest = head;
-                while (oldest->next->next != NULL)
-                {
-                    oldest = oldest->next;
+                if(flag==0){
+                    frames[m]=pages[i];
+                    m=(m+1)%w;
+                    faults++;
                 }
-                oldest->next->p = pid;
-                oldest->next->next = head;
-                head = oldest->next;
-                oldest->next = NULL;
-            }
-        }
-        else
-        {
-            pf++;
-        }
-        printll();
-    }
-    printf("Page faults:%d\n", pf);
-    pf = 0;
-    struct LL *curr = head;
-    while (curr != NULL)
-    {
-        struct LL *temp = curr;
-        curr = curr->next;
-        free(temp);
-    }
-    head = NULL;
-    printf("Enter number of frames and pages: ");
-    scanf("%d %d", &f, &p);
-    printf("Optimal\n");
-    struct LL *pages[f]; 
-    for (int i = 0; i < f; i++) {
-        pages[i] = NULL;
-    }
-
-    int page_numbers[p]; 
-    for (int i = 0; i < p; i++) {
-        printf("Enter Pno: ");
-        scanf("%d", &page_numbers[i]);
-    }
-
-    for (int i = 0; i < p; i++) {
-        int pid = page_numbers[i];
-        if (!check(pid)) { 
-            if (pf < f) { 
-                struct LL *node = (struct LL *)malloc(sizeof(struct LL));
-                node->p = pid;
-                node->next = head;
-                head = node;
-                pages[pf] = node;
-                pf++;
-            } else {
-                int replace_index = find_optimal(pages, f, p, i);
-                if (replace_index != -1) {
-                    struct LL *node = (struct LL *)malloc(sizeof(struct LL));
-                    node->p = pid;
-                    node->next = head;
-                    head = node;
-
-                    pages[replace_index] = node; 
+                for (int j=0;j<w;j++){
+                    printf("%d ",frames[j]);
                 }
+                printf("\n");
             }
-            printll(); 
+            printf("Faults:%d\n",faults);
+            break;
+        case 2:
+            printf("LRU\n");
+            for (int i=0;i<n;i++){
+                int flag=0;
+                for (int j=0;j<w;j++){
+                    if(frames[j]==pages[i]){
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag==0){
+                    
+                    for (int j=0;j<w;j++){
+                        if(frames[j]==-1){
+                            frames[j]=pages[i];
+                            flag=1;
+                            break;
+                        }
+                    }
+                    if(flag==0){
+                        int ind=-1;
+                        int mini=100000;
+                        for(int j=0;j<w;j++){
+                            int k;
+                            for(k=i-1;k>=0;k--){
+                                if(frames[j]==pages[k]){
+                                    break;
+                                }
+                            }
+                            if(k<mini){
+                                mini=k;
+                                ind=j;
+                            }
+                        }
+                        frames[ind]=pages[i];
+                    }
+
+                    faults++;
+                    
+                }
+                for (int j=0;j<w;j++){
+                    printf("%d ",frames[j]);
+                }
+                printf("\n");
+            }
+            printf("Faults:%d\n",faults);
+            break;
+        case 3:
+            printf("Optimal\n");
+            for(int i=0;i<n;i++){
+                int flag=0;
+                for(int j=0;j<w;j++){
+                    if(pages[i]==frames[j]){
+                        flag=1;
+                        break;
+                    }
+                }
+                if(!flag){
+                    if(m<w){
+                        frames[m]=pages[m];
+                        m++;
+                        faults++;
+                    }
+                    else{
+                        int max=0;
+                        int ind=-1;
+                        for(int j=0;j<w;j++){
+                            int fla=0;
+                            for (int k=i+1;k<n;k++){
+                                if(pages[k]==frames[j]){
+                                    fla=1;
+                                    if(max<k){
+                                        max=k;
+                                        ind=j;
+                                    }
+                                }
+                            }
+                            if(fla==0){
+                                ind=j;
+                                break;
+                            }
+                        }
+                        frames[ind]=pages[i];
+                        faults++;
+                    }
+                }
+                for (int j=0;j<w;j++){
+                    printf("%d ",frames[j]);
+                }
+                printf("\n");
+            }
+            printf("Faults:%d\n",faults);
+            break;
+        case 4:
+            exit(0);
+            break;
+        
+        default:
+            break;
         }
     }
-    printf("Page faults: %d\n", pf);
-
-    curr = head;
-    while (curr != NULL) {
-        struct LL *temp = curr;
-        curr = curr->next;
-        free(temp);
-    }
-    return 0;
-
     return 0;
 }
