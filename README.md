@@ -13,4 +13,4 @@ Welcome,
 ####  ES-LAB: Assembly and Embedded C
 ## V sem
 ####  IS-Lab: Python
-####  POS-Lab: shell commands
+####  POS-Lab: Shell commands and C
