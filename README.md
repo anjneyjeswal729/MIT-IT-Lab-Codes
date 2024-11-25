@@ -1,7 +1,7 @@
 # MIT IT lab codes
 
-Welcome,
-  This repo contains the codes belong to labs of Manipal Institute of Technology, IT branch
+<p>Welcome,</p>
+<p>  This repo contains the codes belong to labs of Manipal Institute of Technology, IT branch</p>
 
 ## III sem
 ####  DS-LAB: Data Structures lab in C language 
