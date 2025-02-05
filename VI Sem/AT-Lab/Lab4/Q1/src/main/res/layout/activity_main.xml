@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quiz Time"
+                android:textStyle="bold"
+                android:textSize="50sp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. What is the capital of France?"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/answer1a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="a) London" />
+
+                <RadioButton
+                    android:id="@+id/answer1b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="b) Paris" />
+
+                <RadioButton
+                    android:id="@+id/answer1c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="c) Berlin" />
+
+                <RadioButton
+                    android:id="@+id/answer1d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="d) Madrid" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. Which planet is known as the Red Planet?"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/answer2a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="a) Venus" />
+
+                <RadioButton
+                    android:id="@+id/answer2b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="b) Mars" />
+
+                <RadioButton
+                    android:id="@+id/answer2c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="c) Jupiter" />
+
+                <RadioButton
+                    android:id="@+id/answer2d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="d) Saturn" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. Who wrote the play 'Romeo and Juliet'?"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/answer3a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="a) Charles Dickens" />
+
+                <RadioButton
+                    android:id="@+id/answer3b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="b) Mark Twain" />
+
+                <RadioButton
+                    android:id="@+id/answer3c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="c) William Shakespeare" />
+
+                <RadioButton
+                    android:id="@+id/answer3d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="d) Jane Austen" />
+            </RadioGroup>
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Which animal is known as the king of the jungle?"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/answer4a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="a) Tiger" />
+
+                <RadioButton
+                    android:id="@+id/answer4b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="b) Elephant" />
+
+                <RadioButton
+                    android:id="@+id/answer4c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="c) Lion" />
+
+                <RadioButton
+                    android:id="@+id/answer4d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="d) Giraffe" />
+
+
+            </RadioGroup>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
