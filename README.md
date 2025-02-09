@@ -14,3 +14,6 @@
 ## V sem
 ####  IS-Lab: Python
 ####  POS-Lab: Shell commands and C
+## VI sem
+#### AT-Lab
+#### DM-Lab
