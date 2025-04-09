@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Invoice Title -->
+    <TextView
+        android:id="@+id/tv_invoice_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invoice Details"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="8dp" />
+
+    <!-- Invoice Details Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txt_invoice_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No products selected."
+            android:textSize="16sp"
+            android:padding="8dp" />
+    </ScrollView>
+
+    <!-- Save Invoice Button -->
+    <Button
+        android:id="@+id/btn_save_invoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Invoice"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
