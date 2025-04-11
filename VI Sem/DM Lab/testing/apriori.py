@@ -56,3 +56,17 @@ def candidate2gen():
         print(set(k),frequent_items[k])
 
 candidate2gen()
+m={'A','B','E'}
+
+def genassociation(k):
+    # k=frozenset(m)
+    # mk=set()
+    csupp=sum(1 for tra in dataset if k.issubset(tra))
+    for i in range(1, len(k)):
+        for subset in combinations(k, i):
+            an=frozenset(subset)
+            supp=sum(1 for tra in dataset if set(an).issubset(tra))
+            if csupp/supp>=minconf:
+                print(set(an),set(k-an),(csupp/supp))
+for k in l2:
+    genassociation(k) 
