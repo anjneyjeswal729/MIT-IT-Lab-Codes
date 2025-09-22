@@ -1,3 +1,10 @@
+'''Use a Hill cipher to encipher the message "We live in an insecure world". Use the
+ following key:
+ 𝐾
+    = 
+[03 03 
+02 07]'''
+
 import numpy as np
 
 # Function to convert a letter to its numerical value
