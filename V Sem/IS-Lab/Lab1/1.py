@@ -1,12 +1,12 @@
-#Encrypt the message "I am learning #information security" using each of the #following
-#ciphers. Ignore the space between words. #Decrypt the message to get the original
-#plaintext:
-#a) Additive cipher with key = 20
-#b) Multiplicative cipher with key = 15
-#c) Affine cipher with key = (15, 20)
+'''Encrypt the message "I am learning #information security" using each of the #following
+ciphers. Ignore the space between words. #Decrypt the message to get the original
+plaintext:
+a) Additive cipher with key = 20
+b) Multiplicative cipher with key = 15
+c) Affine cipher with key = (15, 20)
 
 #Code :- 
-
+'''
 def mod_inverse(a, m):
     # Find modular multiplicative inverse of 'a' under modulo 'm'
     for i in range(m):
@@ -93,4 +93,5 @@ print("Decrypted Message:", decrypted_message)
 
 # Multiplicative cipher encryption
 print("Multiplicative Encryption:", encrypt(message, 15, 'mul'))
+
         
