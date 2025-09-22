@@ -1,6 +1,6 @@
-Given an ElGamal encryption scheme with a public key (p, g, h) and a private key
+'''Given an ElGamal encryption scheme with a public key (p, g, h) and a private key
  x, encrypt the message "Confidential Data". Then decrypt the ciphertext to retrieve
- the original message.
+ the original message.'''
 
 import random
 
