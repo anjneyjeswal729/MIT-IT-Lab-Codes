@@ -1,3 +1,7 @@
+'''Use the Playfair cipher to encipher the message "The key is hidden under the door pad".
+ The secret key can be made by filling the first and part of the second row with the word
+ "GUIDANCE" and filling the rest of the matrix with the rest of the alphabet.'''
+
 def create_playfair_matrix(keyword):
     """Create a 5x5 Playfair cipher matrix from the given keyword."""
     keyword = keyword.upper().replace('J', 'I')
