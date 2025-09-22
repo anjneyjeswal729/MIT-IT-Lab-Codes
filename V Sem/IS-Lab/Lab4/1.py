@@ -1,3 +1,29 @@
+ '''SecureCorp is a large enterprise with multiple subsidiaries and business units located
+ across different geographical regions. As part of their digital transformation initiative,
+ the IT team at SecureCorp has been tasked with building a secure and scalable
+ communication system to enable seamless collaboration and information sharing
+ between their various subsystems.
+ The enterprise system consists of the following key subsystems:
+ 1. Finance System (System A): Responsible for all financial record-keeping, accounting,
+ and reporting.
+ 2. HR System (System B): Manages employee data, payroll, and personnel related
+ processes.
+ 3. Supply Chain Management (System C): Coordinates the flow of goods, services, and
+ information across the organization's supply chain
+ These subsystems need to communicate securely and exchange critical documents, such
+ financial reports, employee contracts, and procurement orders, to ensure the enterprise's
+ overall efficiency.
+ The IT team at SecureCorp has identified the following requirements for the secure
+ communication and document signing solution:
+ 1. Secure Communication: The subsystems must be able to establish secure
+ communication channels using a combination of RSA encryption and Diffie-Hellman
+key exchange.
+ 2. Key Management: SecureCorp requires a robust key management system to generate,
+ distribute, and revoke keys as needed to maintain the security of the enterprise system.
+ 3. Scalability: The solution must be designed to accommodate the addition of new
+ subsystems in the future as SecureCorp continues to grow and expand its operations.
+ Implement a Python program which incorporates the requirements.'''
+
 from cryptography.hazmat.primitives.asymmetric import dh, rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 from Crypto.Cipher import AES
