@@ -1,3 +1,8 @@
+Using ECC (Elliptic Curve Cryptography), encrypt the message "Secure
+ Transactions" with the public key. Then decrypt the ciphertext with the private key
+ to verify the original message. 
+
+
 import tinyec.ec as ec
 from tinyec import registry
 import secrets
