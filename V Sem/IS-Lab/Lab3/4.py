@@ -1,3 +1,14 @@
+'''Design and implement a secure file transfer system using RSA (2048-bit) and ECC
+ (secp256r1 curve) public key algorithms. Generate and exchange keys, then
+ encrypt and decrypt files of varying sizes (e.g., 1 MB, 10 MB) using both
+ algorithms. Measure and compare the performance in terms of key generation
+ time, encryption/decryption speed, and computational overhead. Evaluate the
+ security and efficiency of each algorithm in the context of file transfer, considering
+factors such as key size, storage requirements, and resistance to known attacks.
+ Document your findings, including performance metrics and a summary of the
+ strengths and weaknesses of RSA and ECC for secure file transfer. '''
+
+
 import os
 import time
 from Crypto.PublicKey import RSA
@@ -8,54 +19,54 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.backends import default_backend
 
 def generate_rsa_keys():
-    """Generate RSA keys."""
+    """Generate RSA keys (2048-bit)."""
     key = RSA.generate(2048)
     private_key = key.export_key()
     public_key = key.publickey().export_key()
     return private_key, public_key
 
 def generate_ecc_keys():
-    """Generate ECC keys."""
+    """Generate ECC keys using SECP256R1 curve."""
     private_key = ec.generate_private_key(ec.SECP256R1(), default_backend())
     public_key = private_key.public_key()
     return private_key, public_key
 
 def encrypt_rsa(public_key, data):
-    """Encrypt data using RSA."""
+    """Encrypt data using RSA public key with OAEP."""
     rsa_key = RSA.import_key(public_key)
     cipher = PKCS1_OAEP.new(rsa_key)
     return cipher.encrypt(data)
 
 def decrypt_rsa(private_key, ciphertext):
-    """Decrypt data using RSA."""
+    """Decrypt data using RSA private key with OAEP."""
     rsa_key = RSA.import_key(private_key)
     cipher = PKCS1_OAEP.new(rsa_key)
     return cipher.decrypt(ciphertext)
 
 def encrypt_aes(key, data):
-    """Encrypt data using AES."""
-    cipher = AES.new(key, AES.MODE_GCM)
-    ciphertext, tag = cipher.encrypt_and_digest(data)
-    return cipher.nonce + tag + ciphertext
+    """Encrypt data using AES in GCM mode."""
+    cipher = AES.new(key, AES.MODE_GCM)               # GCM mode provides authentication
+    ciphertext, tag = cipher.encrypt_and_digest(data) # Encrypt and compute tag
+    return cipher.nonce + tag + ciphertext            # Combine nonce, tag, ciphertext
 
 def decrypt_aes(key, ciphertext):
-    """Decrypt data using AES."""
-    nonce = ciphertext[:16]
-    tag = ciphertext[16:32]
-    ciphertext = ciphertext[32:]
+    """Decrypt data using AES in GCM mode."""
+    nonce = ciphertext[:16]                            # Extract nonce
+    tag = ciphertext[16:32]                            # Extract tag
+    ciphertext = ciphertext[32:]                       # Extract actual ciphertext
     cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-    return cipher.decrypt_and_verify(ciphertext, tag)
+    return cipher.decrypt_and_verify(ciphertext, tag)  # Decrypt and verify integrity
 
 def measure_performance():
-    # File size configuration
+    # File sizes to test
     file_sizes = [1 * 1024 * 1024, 10 * 1024 * 1024]  # 1MB and 10MB
 
-    # RSA Key Generation
+    # Measure RSA key generation time
     start_time = time.time()
     rsa_private, rsa_public = generate_rsa_keys()
     rsa_keygen_time = time.time() - start_time
 
-    # ECC Key Generation
+    # Measure ECC key generation time
     start_time = time.time()
     ecc_private, ecc_public = generate_ecc_keys()
     ecc_keygen_time = time.time() - start_time
@@ -63,33 +74,30 @@ def measure_performance():
     results = []
 
     for size in file_sizes:
-        # Generate dummy data
-        data = os.urandom(size)
+        data = os.urandom(size)          # Generate random data of given size
+        aes_key = get_random_bytes(16)   # AES-128 key
 
-        # Generate AES key
-        aes_key = get_random_bytes(16)  # AES-128
-
-        # Encrypt data with AES
+        # AES encryption
         start_time = time.time()
         aes_encrypted = encrypt_aes(aes_key, data)
         aes_encrypt_time = time.time() - start_time
 
-        # Encrypt AES key with RSA
+        # Encrypt AES key using RSA
         start_time = time.time()
         rsa_encrypted_key = encrypt_rsa(rsa_public, aes_key)
         rsa_encrypt_key_time = time.time() - start_time
 
-        # Decrypt AES key with RSA
+        # Decrypt AES key using RSA
         start_time = time.time()
         decrypted_aes_key = decrypt_rsa(rsa_private, rsa_encrypted_key)
         rsa_decrypt_key_time = time.time() - start_time
 
-        # Decrypt data with AES
+        # AES decryption
         start_time = time.time()
         aes_decrypted = decrypt_aes(decrypted_aes_key, aes_encrypted)
         aes_decrypt_time = time.time() - start_time
 
-        # Performance metrics
+        # Store performance metrics
         results.append({
             'size': size,
             'rsa_keygen_time': rsa_keygen_time,
@@ -98,7 +106,7 @@ def measure_performance():
             'rsa_encrypt_key_time': rsa_encrypt_key_time,
             'rsa_decrypt_key_time': rsa_decrypt_key_time,
             'aes_decrypt_time': aes_decrypt_time,
-            'data_matches': data == aes_decrypted,
+            'data_matches': data == aes_decrypted,  # Verify correctness
         })
 
     return results
@@ -119,3 +127,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
