@@ -1,3 +1,6 @@
+'''Try using the Diffie-Hellman asymmetric encryption standard and verify the above
+ steps.'''
+
 import random
 from sympy import isprime
 from Crypto.Hash import HMAC, SHA256
