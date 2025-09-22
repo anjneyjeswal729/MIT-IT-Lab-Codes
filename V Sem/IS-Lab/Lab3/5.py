@@ -1,3 +1,11 @@
+'''As part of a project to enhance the security of communication in a peer-to-peer file
+ sharing system, you are tasked with implementing a secure key exchange
+ mechanism using the Diffie-Hellman algorithm. Each peer must establish a shared
+ secret key with another peer over an insecure channel. Implement the Diffie
+Hellman key exchange protocol, enabling peers to generate their public and private
+ keys and securely compute the shared secret key. Measure the time taken for key
+ generation and key exchange processes'''
+
 import time
 import random
 from cryptography.hazmat.primitives.asymmetric import dh
